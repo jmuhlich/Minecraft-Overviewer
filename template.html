@@ -8,6 +8,7 @@
   #mcmap { height: 100% }
 </style>
 <script type="text/javascript" src="markers.js"></script>
+<script type="text/javascript" src="playermarkers.js"></script>
 <script type="text/javascript" src="regions.js"></script>
 <script type="text/javascript"
     src="http://maps.google.com/maps/api/js?sensor=false">
@@ -154,6 +155,20 @@
         title: item.msg
       });
    }
+
+    if (playerMarkerData) {
+      for (i in playerMarkerData) {
+        var item = playerMarkerData[i];
+
+        var converted = fromWorldToLatLng(item.x, item.y, item.z);
+        var marker = new google.maps.Marker({
+          position: converted,
+          map: map,
+          title: item.msg,
+          icon: 'http://maps.gstatic.com/intl/en_us/mapfiles/ms/micons/blue-dot.png'
+        });
+      }
+    }
   }
   
   var regionsInit = false;
